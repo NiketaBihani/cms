@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Example of a valid COM XML file (stored in Alfresco on node version and also in ML) -->
+<object type="hmh-cms:learningObject" 
+    workspaceURI="workspace://SpacesStore/47fdf474-35dc-47ed-9a73-c290fc35952f" 
+    versionURI="workspace://version2Store/ce88511e-dd21-4e93-a2ed-d6c41e0de0e1"
+    versionNumber="1.1" name="Course Opener" 
+    xmlns="http://www.hmhco.com/hmh-cms/com/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:hmh-cms="http://www.hmhco.com/model/hmh-cms/1.0"
+    xmlns:cm="http://www.alfresco.org/model/content/1.0"
+    xsi:schemaLocation="http://www.hmhco.com/model/hmh-cms/1.0 hmhcms_com_schema.xsd">
+    <properties>
+        <!-- Not sure about the actual need for title and type here actually, but we include them anyway just in case -->
+        <property name="cm:title" title="Display Title" type="d:text">
+            <value>some title</value>
+        </property>
+        <property name="sys:node-uuid" title="CMSID" type="d:text">
+            <value>47fdf474-35dc-47ed-9a73-c290fc35952f</value>
+        </property>
+        <property name="cm:description" title="Meaningful Description" type="d:text">
+            <value>meaningful description</value>
+        </property>
+        <property name="cm:content" title="Content" type="d:text">
+            <value>s3://-system-/contentstore/822e0bb6-ae46-4a85-bc34-33db4991ce12.bin</value>
+        </property>
+        <!-- NB MIME type is a "metaproperty", not a standalone in Alfresco -->
+        <property name="cm:mimetype" title="MIME" type="d:text">
+            <value>image/jpeg</value>
+        </property>
+        <property name="cm:modified" title="Modified" type="datetime">
+            <value>2015-04-30T12:01:38+00:00</value>
+        </property>
+        <property name="hmh-cms:copyrightYear" title="Copyright Year" type="int">
+            <value>2015</value>
+        </property>
+        <property name="hmh-cms:grade" title="Grade" type="d:text">
+            <value>K</value>
+            <value>1</value>
+            <value>5</value>
+        </property>
+        <property name="cm:taggable" title="HMH Keywords" type="noderef">
+            <value>tag 1</value>
+            <value>tag 2</value>
+        </property>
+        <property name="cm:categories" title="Categories" type="noderef">
+            <value>Category 1</value>
+            <value>Category 2</value>
+        </property>
+    </properties>
+    <relationships>
+        <relationship type="hmh-cms:references">
+            <value>workspace://version2Store/ce88511e-dd21-4e93-a2ed-d6c41e0de0e1</value>
+            <value>workspace://SpacesStore/7b909bdb-a95a-418b-b17e-f246fc7ebfce</value>
+        </relationship>
+        <!-- note: correlated objects are not stored in ML, so that is for future use -->
+        <relationship type="hmh-cms:correlation">
+            <value>workspace://SpacesStore/01bccc29-9538-41ff-823e-c290fc35952f</value>
+            <value>workspace://SpacesStore/7b909bdb-a95a-418b-b17e-f246fc7ebfce</value>
+        </relationship>
+        <correlations>
+            <standard name="Math (2010) (79613598)" hmco="NT.CCSS.MTH.10" standardText="Math (2010) (79613598)" officialCode="1.1">
+                <customCode>2015 National Go Math</customCode>
+                <customCode>National Math (2010)</customCode>
+            </standard>
+        </correlations>
+        <sem:triples
+            xmlns:sem="http://marklogic.com/semantics">
+            <sem:triple>
+                <sem:subject>workspace://version2Store/ce88511e-dd21-4e93-a2ed-d6c41e0de0e1</sem:subject>
+                <sem:predicate>http://www.hmhco.com/model/hmh-cms/1.0/references</sem:predicate>
+                <sem:object>workspace://SpacesStore/798e3463-67c7-49cc-998b-4987f2e43d09</sem:object>
+            </sem:triple>
+            <sem:triple>
+                <sem:subject>workspace://version2Store/ce88511e-dd21-4e93-a2ed-d6c41e0de0e1</sem:subject>
+                <sem:predicate>http://www.hmhco.com/model/hmh-cms/1.0/correlation</sem:predicate>
+                <sem:object>workspace://SpacesStore/7b909bdb-a95a-418b-b17e-f246fc7ebfce</sem:object>
+            </sem:triple>
+        </sem:triples>
+    </relationships>
+</object>

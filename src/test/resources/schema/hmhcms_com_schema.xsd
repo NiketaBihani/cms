@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" 
+  targetNamespace="http://www.hmhco.com/hmh-cms/com/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:sem="http://marklogic.com/semantics" xmlns:com="http://www.hmhco.com/hmh-cms/com/1.0">
+  <xs:import namespace="http://marklogic.com/semantics" schemaLocation="semantics.xsd"/>
+  <xs:element name="object">
+    <xs:annotation>
+      <xs:documentation>Object instance (node)</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="com:properties"/>
+        <xs:element ref="com:relationships" minOccurs="0"/>
+        <xs:element ref="com:contains" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="required"/>
+      <xs:attribute name="type" use="required" type="xs:string"/>
+      <xs:attribute name="versionNumber" use="required" type="xs:string"/>
+      <xs:attribute name="versionURI" use="required" type="xs:anyURI"/>
+      <xs:attribute name="workspaceURI" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="properties">
+    <xs:annotation>
+      <xs:documentation>Object properties</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="com:property"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="property">
+    <xs:annotation>
+      <xs:documentation>A property of the object</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="com:value"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="title" use="optional"/>
+      <xs:attribute name="type" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="relationships">
+    <xs:annotation>
+      <xs:documentation>Relationships of the object</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="com:relationship" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="com:correlations" minOccurs="0"/>
+        <xs:element ref="sem:triples" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>We also store relationships as 'unmanaged' MarkLogic triples for future use. See https://docs.marklogic.com/guide/semantics/intro</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="contains">
+    <xs:annotation>
+      <xs:documentation>Other objects that the parent contains</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="com:object" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="relationship">
+    <xs:annotation>
+      <xs:documentation>A relationship of the object</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="com:value"/>
+      </xs:sequence>
+      <xs:attribute name="type" use="required" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="correlations">
+    <xs:annotation>
+      <xs:documentation>Correlations with standards. Note: they are actually relationships, but we need the additional information in the Standard element at least temporarily</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="com:standard" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="standard">
+    <xs:annotation>
+      <xs:documentation>A HMSI standard correlated with the object</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="com:customCode"/>
+      </xs:sequence>
+      <xs:attribute name="hmco" use="required" type="xs:string"/>
+      <xs:attribute name="name" use="required" type="xs:string"/>
+      <xs:attribute name="abGuid" use="optional" type="xs:string"/>
+      <xs:attribute name="guid" use="optional" type="xs:string"/>
+      <xs:attribute name="state" use="optional" type="xs:string"/>
+      <xs:attribute name="source" use="optional" type="xs:string"/>
+      <xs:attribute name="hierarchyId" use="optional" type="xs:string"/>
+      <xs:attribute name="officialCode" use="optional" type="xs:string"/>
+      <xs:attribute name="versionNumber" use="optional" type="xs:string"/>
+      <xs:attribute name="versionName" use="optional" type="xs:string"/>
+      <xs:attribute name="fromGrade" use="optional" type="xs:string"/>
+      <xs:attribute name="toGrade" use="optional" type="xs:string"/>
+      <xs:attribute name="standardText" use="optional" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="customCode" type="xs:string"/>
+  <xs:element name="value" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>Generic element for a (property) value representation</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

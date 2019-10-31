@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Example of a valid COM Snapshot (CSX) XML file (stored in ML) -->
+<object type="hmh-cms:productSet" 
+    workspaceURI="workspace://SpacesStore/47fdf474-35dc-47ed-9a73-c290fc35952f" 
+    versionURI="workspace://version2Store/ce88511e-dd21-4e93-a2ed-d6c41e0de0e1"
+    versionNumber="1.1" name="Product Set" 
+    xmlns="http://www.hmhco.com/hmh-cms/com/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:hmh-cms="http://www.hmhco.com/model/hmh-cms/1.0"
+    xmlns:cm="http://www.alfresco.org/model/content/1.0"
+    xsi:schemaLocation="http://www.hmhco.com/model/hmh-cms/1.0 hmhcms_com_schema.xsd">
+    <properties>
+        <property name="cm:name" title="Name" type="d:text">
+            <value>Product Set</value>
+        </property>
+        <property name="cm:title" title="Display Title" type="d:text">
+            <value>PS title</value>
+        </property>
+        <property name="sys:node-uuid" title="CMSID" type="d:text">
+            <value>47fdf474-35dc-47ed-9a73-c290fc35952f</value>
+        </property>
+        <property name="cm:modified" title="Modified" type="datetime">
+            <value>2015-04-30T12:01:38+00:00</value>
+        </property>
+        <property name="cm:taggable" title="HMH Keywords" type="noderef">
+            <value>tag 1</value>
+            <value>tag 2</value>
+        </property>
+    </properties>
+    <contains>
+        <object type="hmh-cms:learningObject" 
+            workspaceURI="workspace://SpacesStore/aa6bf282-a5d0-4fc9-a7a0-b1a9b40cd28e" 
+            versionURI="workspace://version2Store/ce88511e-dd21-4e93-a2ed-d6c41e0de0e1"
+            versionNumber="1.1" name="Learning Object">
+            <properties>
+                <property name="cm:name" title="Name" type="d:text">
+                    <value>Learning Object</value>
+                </property>
+                <property name="cm:title" title="Display Title" type="d:text">
+                    <value>PS title</value>
+                </property>
+                <property name="sys:node-uuid" title="CMSID" type="d:text">
+                    <value>47fdf474-35dc-47ed-9a73-c290fc35952f</value>
+                </property>
+                <property name="cm:description" title="Meaningful Description" type="d:text">
+                    <value>Some meaningful description</value>
+                </property>
+                <property name="cm:modified" title="Modified" type="datetime">
+                    <value>2015-04-30T12:01:38+00:00</value>
+                </property>
+                <property name="cm:taggable" title="HMH Keywords" type="noderef">
+                    <value>tag 1</value>
+                    <value>tag 2</value>
+                </property>
+            </properties>
+            <relationships>
+                <correlations>
+                    <standard name="Math (2010) (79613598)" hmco="NT.CCSS.MTH.10" standardText="Math (2010) (79613598)" officialCode="1.1">
+                        <customCode>2015 National Go Math</customCode>
+                        <customCode>National Math (2010)</customCode>
+                    </standard>
+                </correlations>
+                <sem:triples
+                    xmlns:sem="http://marklogic.com/semantics">
+                    <sem:triple>
+                        <sem:subject>workspace://version2Store/ce88511e-dd21-4e93-a2ed-d6c41e0de0e1</sem:subject>
+                        <sem:predicate>http://www.hmhco.com/model/hmh-cms/1.0/references</sem:predicate>
+                        <sem:object>workspace://SpacesStore/798e3463-67c7-49cc-998b-4987f2e43d09</sem:object>
+                    </sem:triple>
+                </sem:triples>
+            </relationships>
+        </object>
+        <object type="hmh-cms:componentObject" 
+            workspaceURI="workspace://SpacesStore/aa6bf282-a5d0-4fc9-a7a0-b1a9b40cd29e" 
+            versionURI="workspace://version2Store/ce88511e-dd21-4e93-a2ed-d6c41e0de0e1"
+            versionNumber="1.0" name="Component">
+            <properties>
+                <property name="cm:name" title="Name" type="d:text">
+                    <value>Component</value>
+                </property>
+                <property name="cm:title" title="Display Title" type="d:text">
+                    <value>Component</value>
+                </property>
+                <property name="sys:node-uuid" title="CMSID" type="d:text">
+                    <value>47fdf474-35dc-47ed-9a73-c290fc35952f</value>
+                </property>
+                <property name="cm:modified" title="Modified" type="datetime">
+                    <value>2015-04-30T12:01:38+00:00</value>
+                </property>
+            </properties>
+        </object>
+    </contains>
+    <relationships>
+        <relationship type="hmh-cms:correlation">
+            <value>workspace://SpacesStore/01bccc29-9538-41ff-823e-c290fc35952f</value>
+            <value>workspace://SpacesStore/7b909bdb-a95a-418b-b17e-f246fc7ebfce</value>
+        </relationship>
+        <correlations>
+            <standard name="Math (2010) (79613598)" hmco="NT.CCSS.MTH.10" standardText="Math (2010) (79613598)" officialCode="1.1">
+                <customCode>2015 National Go Math</customCode>
+                <customCode>National Math (2010)</customCode>
+            </standard>
+        </correlations>
+        <sem:triples
+            xmlns:sem="http://marklogic.com/semantics">
+            <sem:triple>
+                <sem:subject>workspace://version2Store/ce88511e-dd21-4e93-a2ed-d6c41e0de0e1</sem:subject>
+                <sem:predicate>http://www.hmhco.com/model/hmh-cms/1.0/correlation</sem:predicate>
+                <sem:object>workspace://SpacesStore/7b909bdb-a95a-418b-b17e-f246fc7ebfce</sem:object>
+            </sem:triple>
+        </sem:triples>
+    </relationships>
+</object>

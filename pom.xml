@@ -1,0 +1,420 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.ixxus.hmh</groupId>
+	<artifactId>hmhcms-automation</artifactId>
+	<version>2.1.0-CTS-QA</version>
+	<packaging>jar</packaging>
+
+	<properties>
+	    <test.suite>BVTTestSuite</test.suite>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<serenity.version>1.1.36</serenity.version>
+        <serenity.maven.version>1.1.36</serenity.maven.version>
+        <vanilla.alfresco.version>2.1.3</vanilla.alfresco.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<webdriver.firefox>firefox</webdriver.firefox>
+		<!-- Default test suite would be TestSuite.java here. See test.suite property above -->
+		<completeTestSuite>**/${test.suite}.java</completeTestSuite>
+		<webdriver.ie>webdrivers\IEDriverServer.exe</webdriver.ie>
+		<webdriver.chrome>webdrivers\chromedriver.exe</webdriver.chrome>
+		<max.retries>1</max.retries>
+		<webdriver.htmlunit>htmlunit</webdriver.htmlunit>
+		<webdriver.phantomjs>phantomjs</webdriver.phantomjs>
+		<serenity.report.show.manual.tests>true</serenity.report.show.manual.tests>
+	<!--	<maven.test.failure.ignore>true</maven.test.failure.ignore>
+		 <sonar.skip>true</sonar.skip> -->
+		 
+		 <!-- These properties can be overridden by passing parameter.
+		 e.g. -Dshare.instance=http://localhost:8080 
+		 e.g. -Dshare.instance=https://cert.cms.hmhco.com
+		 e.g. -Dshare.userName=automation_user_02
+		 e.g. -Dshare.pass=welcome
+		 e.g. -Dshare.dispName=Automation User 02
+		 e.g. -Ddownload.path=C:\Downloads
+		 e.g. -Ddriver.path=C:\Webdrivers\chromedriver.exe  -->
+		<share.instance>http://10.34.36.46:8080</share.instance>
+		<share.userName>automation_user_02</share.userName>		
+		<!-- Pass the correct password for the selected user pertaining to the selected environment -->
+		<share.pass>welcome</share.pass>
+		<share.dispName>Automation User 02</share.dispName>		
+		<!-- Pass the download path dynamically -->
+		<download.path></download.path>
+		<!-- Pass the driver path dynamically -->
+		<driver.path></driver.path>
+	</properties>
+	<repositories>
+		<repository>
+			<id>ixxus-nexus</id>
+			<url>http://dubv-engnex01.dubeng.local:8082/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>ixxus-releases</id>
+			<url>http://dubv-engnex01.dubeng.local:8082/nexus/content/repositories/releases</url>
+		</repository>
+		<repository>
+			<id>ixxus-snapshots</id>
+			<url>http://dubv-engnex01.dubeng.local:8082/nexus/content/repositories/snapshots</url>
+		</repository>
+		<repository>
+			<id>serenity</id>
+			<name>bintray</name>
+			<url>http://dl.bintray.com/serenity/maven</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>ixxus-nexus</id>
+			<url>http://dubv-engnex01.dubeng.local:8082/nexus/content/groups/public</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>ixxus-snapshots</id>
+			<url>http://dubv-engnex01.dubeng.local:8082/nexus/content/repositories/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>serenity</id>
+			<name>bintray-plugins</name>
+			<url>http://dl.bintray.com/serenity/maven</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<distributionManagement>
+		<repository>
+			<id>ixxus-releases</id>
+			<url>http://dubv-engnex01.dubeng.local:8082/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>ixxus-snapshots</id>
+			<url>http://dubv-engnex01.dubeng.local:8082/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<dependencies>
+		<dependency>
+			<groupId>com.ixxus.ipm</groupId>
+			<artifactId>ixxus-vanilla-alfresco-automation-framework</artifactId>
+			<version>${vanilla.alfresco.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ixxus.ipm</groupId>
+			<artifactId>ixxus-vanilla-alfresco-automation-framework</artifactId>
+			<version>${vanilla.alfresco.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		 <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-core</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>net.serenity-bdd</groupId>     
+            <artifactId>serenity-junit</artifactId>
+            <version>${serenity.version}</version>
+			<!-- <scope>test</scope> -->
+         </dependency>
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>2.4.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-rest-assured</artifactId>
+			<version>1.1.36</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jdom</groupId>
+		    <artifactId>jdom</artifactId>
+		    <version>2.0.2</version>
+		</dependency>
+		
+		<!-- Email dependencies -->
+		 <dependency>
+		  <groupId>com.sun.mail</groupId>
+		  <artifactId>javax.mail</artifactId>
+		  <version>1.5.6</version>
+        </dependency>
+		
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.5.6</version>
+		</dependency>
+		<!-- *** Added Apache POI for Excel validations improvements on 14th Aug 2018-->
+		 <dependency>
+			 <groupId>org.apache.poi</groupId>
+			 <artifactId>poi</artifactId>
+			 <version>3.17</version>
+		 </dependency>
+		 <dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.9</version>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.oopsconsultancy</groupId>
+						<artifactId>xmltask</artifactId>
+						<version>1.14</version>
+						<scope>system</scope>
+						<systemPath>${basedir}/lib/xmltask-1.14.jar</systemPath>
+					</dependency>
+					<dependency>
+						<groupId>xalan</groupId>
+						<artifactId>xalan</artifactId>
+						<version>2.7.2</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<target>
+						<taskdef name="xmltask" classname="com.oopsconsultancy.xmltask.ant.XmlTask"
+							classpathref="maven.plugin.classpath" />
+						<echo>Setting test env configs as: ${share.instance} | ${share.userName} | ${share.dispName} | ${test.suite} |  ${download.path} | ${driver.path} ...</echo>
+						<xmltask source="${basedir}/src/main/resources/config.xml"
+							dest="${basedir}/src/main/resources/config.xml">
+							<replace path="//*[local-name() = 'automationEnvironmentUrl']/text()"
+								withText="${share.instance}/share/page" />
+							<replace path="//*[local-name() = 'automationUser']/text()"
+								withText="${share.userName}" />
+							<replace path="//*[local-name() = 'automationUserPass']/text()"
+								withText="${share.pass}" />
+							<replace path="//*[local-name() = 'automationUserDispName']/text()"
+								withText="${share.dispName}" />
+							<replace path="//*[local-name() = 'automationTestSuite']/text()"
+								withText="${test.suite}" />
+							<replace path="//*[local-name() = 'automationDownloadPath']/text()"
+								withText="${download.path}" />
+							<replace path="//*[local-name() = 'automationDriverPath']/text()"
+								withText="${driver.path}" />
+						</xmltask>
+					</target>
+				</configuration>
+				<goals>
+					<goal>run</goal>
+				</goals>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<artifactItems>
+						<artifactItem>
+							<groupId>com.ixxus.ipm</groupId>
+							<artifactId>ixxus-vanilla-alfresco-automation-framework</artifactId>
+							<version>${vanilla.alfresco.version}</version>
+							<classifier>tests</classifier>
+							<type>jar</type>
+							<overWrite>true</overWrite>
+							<outputDirectory>target/test-classes</outputDirectory>
+							<excludes>**/*.class</excludes>
+						</artifactItem>
+					</artifactItems>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<!-- <phase>process-classes</phase> -->
+						<phase>test</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.ixxus.ipm.automation.introspection.PendingStepsReport</mainClass>
+				</configuration>
+			</plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18</version>
+				<!-- <configuration>
+					<skip>true</skip>
+				</configuration> -->
+				<configuration>
+				<!--	<runOrder>${surefire.test.runOrder}</runOrder> -->
+					<testFailureIgnore>true</testFailureIgnore>
+					<systemPropertyVariables>
+						<webdriver.driver>${webdriver.firefox}</webdriver.driver>  
+					    <webdriver.firefox.bin>C:\Program Files\Mozilla Firefox\firefox.exe</webdriver.firefox.bin>				 
+						<webdriver.ie.driver>${webdriver.ie}</webdriver.ie.driver>
+						<webdriver.chrome.driver>${webdriver.chrome}</webdriver.chrome.driver>
+						 <!-- <webdriver.chrome.bin>C:\Program Files\Google\Chrome\Application\chrome.exe</webdriver.chrome.bin> -->
+						<serenity.use.unique.browser>true</serenity.use.unique.browser>
+						<restart.browser.each.scenario>false</restart.browser.each.scenario>
+						<max.retries>${max.retries}</max.retries>
+						<serenity.take.screenshots>AFTER_EACH_STEP</serenity.take.screenshots>
+						<maven.test.failure.ignore>true</maven.test.failure.ignore>
+						<serenity.logging>VERBOSE</serenity.logging>
+					</systemPropertyVariables>
+					<includes>
+						<!-- <include>**/${testGroup}/*Test.java</include> -->
+						<include>${completeTestSuite}</include> 
+					</includes>
+					<executions>
+						<execution>
+							<id>functional-tests</id>
+							<phase>test</phase>
+							<goals>
+								<goal>test</goal>
+							</goals>
+							<configuration>
+								<skip>false</skip>
+								<parallel>classes</parallel>
+								<perCoreThreadCount>true</perCoreThreadCount>
+							</configuration>
+						</execution>
+					</executions>
+			<!--	<properties>
+				        <property>
+				          <name>SpiraTeamlistener</name>
+				          <value>com.inflectra.spiratest.addons.junitextension.SpiraTestListener</value>
+				        </property>
+				     </properties>    -->
+				</configuration>
+			</plugin>
+      
+			 <plugin>
+                <groupId>net.serenity-bdd.maven.plugins</groupId>       
+                <artifactId>serenity-maven-plugin</artifactId>
+                <version>${serenity.maven.version}</version>
+                <dependencies>
+                     <dependency>
+                        <groupId>net.serenity-bdd</groupId>
+                        <artifactId>serenity-core</artifactId>
+                        <version>${serenity.version}</version>
+                     </dependency>
+					<!-- *** Added for re-run of failed scripts on 6th June 2018 *** -->
+					 <dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit4</artifactId>
+						<version>2.20</version>
+					 </dependency>
+				</dependencies>
+                 <executions>
+	                    <execution>
+	                        <id>serenity-reports</id>
+	                        <phase>post-integration-test</phase>             
+	                        <goals>
+	                            <goal>aggregate</goal>                       
+	                        </goals>
+	                    </execution>
+                 </executions>
+            </plugin>
+		</plugins>		
+	</build>
+	
+	<profiles>
+		<profile>
+	       <id>configure-env</id>
+	       <activation>
+	      	<activeByDefault>true</activeByDefault>
+	       </activation>
+	       <properties>
+	           <share.url>${share.instance}/share/page</share.url>
+	           <automationUser>${share.userName}</automationUser>
+	           <automationUserPass>${share.pass}</automationUserPass>
+	           <automationUserDispName>${share.dispName}</automationUserDispName>
+	       </properties>
+	    </profile>
+		
+		<profile>
+			<id>ftP</id>
+			<build>
+				<plugins>
+					<plugin>
+					    <!-- *** Added for re-run of failed scripts on 6th June 2018 *** -->
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.20</version>
+						<configuration>
+							<includes>
+								<include>${completeTestSuite}</include> 
+							</includes>
+							<systemPropertyVariables>
+								<webdriver.driver>${webdriver.firefox}</webdriver.driver>
+								<webdriver.ie.driver>${webdriver.ie}</webdriver.ie.driver>
+								<webdriver.chrome.driver>${webdriver.chrome}</webdriver.chrome.driver>
+							</systemPropertyVariables>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>2.3.2</version>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.9</version>
+					</plugin>
+					<plugin>
+                		<groupId>net.serenity-bdd.maven.plugins</groupId>       
+						<artifactId>serenity-maven-plugin</artifactId>
+						<version>${serenity.maven.version}</version>
+						<executions>
+							<execution>
+								<id>serenity-reports</id>
+								<phase>post-integration-test</phase>  
+								<goals>
+									<goal>aggregate</goal>
+								</goals>
+                    		</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

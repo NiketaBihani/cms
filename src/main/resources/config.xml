@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><config>
+	<automationEnvironmentUrl>http://10.34.36.46:8080/share/page</automationEnvironmentUrl>
+	<automationUser>automation_user_02</automationUser>
+	<automationUserPass>welcome</automationUserPass>
+	<automationUserDispName>Automation User 02</automationUserDispName>
+	<automationTestSuite>TestSuite</automationTestSuite>
+	<automationDownloadPath/>
+	<automationDriverPath/>
+</config>
